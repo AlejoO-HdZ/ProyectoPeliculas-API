@@ -1,0 +1,47 @@
+# Default ignored files
+/shelf/
+/workspace.xml
+# ARCHIVO .gitignore Se crea desde ya para seguridad del repositorio
+# y mantenerlo limpio de archivos prescindibles o sensibles.
+# ==========================================
+# DEPENDENCIAS
+# ==========================================
+node_modules/
+
+# ==========================================
+# VARIABLES DE ENTORNO Y CREDENCIALES
+# ==========================================
+.env
+
+# ==========================================
+# ARCHIVOS DE LOGS Y DEPURACIÓN
+# ==========================================
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# ==========================================
+# COBERTURA DE PRUEBAS Y CACHÉ
+# ==========================================
+coverage/
+.nyc_output/
+
+# ==========================================
+# ARCHIVOS DEL SISTEMA OPERATIVO
+# ==========================================
+.DS_Store
+Thumbs.db
+
+# ==========================================
+# CONFIGURACIÓN DE EDITORES (VS Code / IntelliJ)
+# ==========================================
+.vscode/
+.idea/
+*.iml
+*.iws
+*.ipr
+out/
+
