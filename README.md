@@ -178,10 +178,10 @@ frontend/
 Sigue estos pasos para clonar y poner en marcha el proyecto en la máquina local:
 
 ### 1. Clonar el repositorio y acceder a la carpeta
-```bash
-git clone <url-de-tu-repositorio>
-cd nombre-de-la-carpeta/backend
 
+```bash
+git clone <url-del-repositorio>
+cd nombre-de-la-carpeta/backend
 
 ###  2. Instalar Dependencias
 
@@ -206,28 +206,46 @@ npm run dev
 node index.js
 
 ###  5. El backend de EA1: API REST NodeJs en ejecución y accesible desde el navegador.
-- Para el Frontend: Requisitos previos: Node.js (versión 18 o superior recomendada) y npm.
+
+###  6. Para el Frontend: Requisitos previos: Node.js (versión 18 o superior recomendada) y npm.
+
+- Crear el proyecto con Vite: Abre la terminal y ejecuta:
+```bash
+npm create vite@latest frontend -- --template react
+
 - Ubícate en el directorio del frontend:
 ```bash
 cd frontend
 
-- Instala las dependencias del proyecto:
-```bash
+- Instala las dependencias del proyecto (principal, Tailwind CSS PostCSS y eslint)
+# Instalar dependencias
 npm install
+
+# Librerías principales
+npm install axios lucide-react react-router-dom
+
+# Tailwind CSS 4
+npm install tailwindcss @tailwindcss/vite
+
+# PostCSS y Autoprefixer
+npm install -D postcss autoprefixer
+
+# ESLint
+npm install -D eslint @eslint/js eslint-plugin-react-hooks eslint-plugin-react-refresh globals
 
 - Configura la URL base de la API REST (axiosClient.js):
 - Revisa src/api/axiosClient.js (y variables de entorno como VITE_API_URL, si las utilizas) para que apunten a la dirección y puerto donde corre tu API de EA1: API REST NodeJs (por ejemplo, http://localhost:4000/api o la ruta configurada en el backend). Asegúrate de que CORS esté habilitado en el servidor.
-
+- Instala 
 - Inicia el servidor de desarrollo:
 ```bash
 npm run dev
 
-- Abre en el navegador la URL local que muestre Vite (habitualmente http://localhost:517x).
+- Abre en el navegador la URL local que muestre Vite (habitualmente http://localhost:517X).
 - Compila para producción (opcional):
 ```bash
 npm run build
 Genera los archivos estáticos listos para despliegue dentro de dist/.
-
+```
 ## 🔌 Endpoints Principales de la API en el Backend
 
 | Módulo | Método | Endpoint | Descripción |
@@ -296,7 +314,6 @@ El sistema fue probado y verificado bajo el siguiente entorno local:
 * **Entorno Local Frontend**: 
    * Entorno local: Verificado en equipo local con el servidor de desarrollo de Vite (npm run dev) conectado a la API REST en Node.js ejecutándose en http://localhost:3000/api (y su base de datos asociada).
    * Pruebas funcionales: Validación de carga de datos, creación, edición y eliminación de registros, así como del comportamiento ante respuestas exitosas y errores HTTP.
-
 
 ## 👤 Acerca del Proyecto
 Desarrollado como parte 1 y 2 (Etapa 1 y 2) del sistema de gestión de backend con Node.js y MongoDB y Frontend con React-Vite, Tailwind CSS y PostCSS.
