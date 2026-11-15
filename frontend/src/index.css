@@ -1,0 +1,29 @@
+/**
+ * ==============================================================================
+ * ARCHIVO: src/index.css
+ * MÓDULO: Estilos Globales / Configuración Base
+ * ------------------------------------------------------------------------------
+ * DESCRIPCIÓN:
+ * Configura las capas base de Tailwind CSS y asegura que el documento ocupe el
+ * 100% del ancho y alto de la ventana sin cuadros centrados ni desbordamiento
+ * horizontal.
+ * ==============================================================================
+ */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Garantiza que html, body y el contenedor raíz abarquen todo el viewport */
+html,
+body,
+#root {
+  width: 100% !important;
+  max-width: 100% !important;
+  min-height: 100vh !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  background-color: #020617 !important;
+  color: #f1f5f9 !important;
+  overflow-x: hidden !important;
+}
