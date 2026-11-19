@@ -22,7 +22,7 @@ const axiosClient = axios.create({
   headers: {
     'Content-Type': 'application/json',
   },
-  timeout: 10000,
+  timeout: 60000,
 });
 
 /* Interceptor de respuesta para centralizar el registro o depuración de errores */
