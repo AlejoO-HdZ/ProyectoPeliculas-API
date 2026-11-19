@@ -8,9 +8,10 @@
  * Implementa las operaciones CRUD completas y respuestas estandarizadas.
  * Normalización de texto (primera letra en mayúscula) y códigos HTTP estandarizados.
  * ==============================================================================
-  */
+ */
 
 const Producer = require('../models/producer.model');
+const Media = require('../models/media.model');
 
 const createProducer = async (req, res) => {
     try {
@@ -116,6 +117,15 @@ const updateProducer = async (req, res) => {
 const deleteProducer = async (req, res) => {
     try {
         const { id } = req.params;
+
+        const mediaAsociada = await Media.exists({ producer: id });
+        if (mediaAsociada) {
+            return res.status(400).json({
+                status: 'error',
+                message: 'No se puede eliminar la productora porque está asociada a una o más películas o series'
+            });
+        }
+
         const producer = await Producer.findByIdAndDelete(id);
 
         if (!producer) {

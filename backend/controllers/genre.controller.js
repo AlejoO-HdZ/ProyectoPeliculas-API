@@ -17,6 +17,7 @@
  */
 
 const Genre = require('../models/genre.model');
+const Media = require('../models/media.model');
 
 const createGenre = async (req, res) => {
     try {
@@ -123,6 +124,15 @@ const updateGenre = async (req, res) => {
 const deleteGenre = async (req, res) => {
     try {
         const { id } = req.params;
+
+        const mediaAsociada = await Media.exists({ genre: id });
+        if (mediaAsociada) {
+            return res.status(400).json({
+                status: 'error',
+                message: 'No se puede eliminar el género porque está asociado a una o más películas o series'
+            });
+        }
+
         const genre = await Genre.findByIdAndDelete(id);
 
         if (!genre) {

@@ -7,10 +7,11 @@
  * Lógica de negocio para gestionar los tipos de contenido multimedia (ej. Serie, Película).
  * Controlador CRUD completo para Tipos de Media. Gestiona creación, listado, 
  * Permite registrar, listar, consultar por ID, actualizar y eliminar tipos.
-  * ==============================================================================
+ * ==============================================================================
  */
 
 const MediaType = require('../models/media-type.model');
+const Media = require('../models/media.model');
 
 // 1. Crear tipo de media
 const createMediaType = async (req, res) => {
@@ -121,6 +122,15 @@ const updateMediaType = async (req, res) => {
 const deleteMediaType = async (req, res) => {
     try {
         const { id } = req.params;
+
+        const mediaAsociada = await Media.exists({ mediaType: id });
+        if (mediaAsociada) {
+            return res.status(400).json({
+                status: 'error',
+                message: 'No se puede eliminar el tipo de multimedia porque está asociado a una o más películas o series'
+            });
+        }
+
         const mediaType = await MediaType.findByIdAndDelete(id);
 
         if (!mediaType) {

@@ -6,14 +6,15 @@
  * DESCRIPCIÓN:
  * Lógica de negocio para gestionar los directores principales de las producciones.
  * Permite registrar, consultar, actualizar y eliminar directores con control estricto de estados.
-  * Lógica CRUD para Directores con normalización y códigos HTTP estandarizados.
+ * Lógica CRUD para Directores con normalización y códigos HTTP estandarizados.
  * ==============================================================================
-  * Controlador CRUD completo para Directores. Gestiona la creación, listado, 
+ * Controlador CRUD completo para Directores. Gestiona la creación, listado, 
  * consulta por ID, actualización y eliminación.
  * ==============================================================================
  */
 
 const Director = require('../models/director.model');
+const Media = require('../models/media.model');
 
 // 1. Crear director
 const createDirector = async (req, res) => {
@@ -124,6 +125,15 @@ const updateDirector = async (req, res) => {
 const deleteDirector = async (req, res) => {
     try {
         const { id } = req.params;
+
+        const mediaAsociada = await Media.exists({ director: id });
+        if (mediaAsociada) {
+            return res.status(400).json({
+                status: 'error',
+                message: 'No se puede eliminar el director porque está asociado a una o más películas o series'
+            });
+        }
+
         const director = await Director.findByIdAndDelete(id);
 
         if (!director) {
